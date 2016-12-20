@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/adamham/php-fpm.svg?branch=master)](https://travis-ci.org/adamham/php-fpm)
+
 php-fpm
 =========
 
