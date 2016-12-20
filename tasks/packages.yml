@@ -3,6 +3,7 @@
       apt:
         name: php5-fpm
         state: present
+        update_cache: yes
       tags:
         - php_fpm_install-packages
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
