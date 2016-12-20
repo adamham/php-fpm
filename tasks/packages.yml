@@ -1,11 +1,29 @@
 - block:
-    - name: install php-fpm
+    - name: apt update
       apt:
-        name: php-fpm
-        state: present
         update_cache: yes
+        cache_valid_time: 86400
       tags:
-        - php_fpm_install-packages
+        - php-fpm_update-cache
+
+    - block:
+        - name: install php-fpm
+          apt:
+            name: php7.0-fpm
+            state: present
+          tags:
+            - php_fpm_install-packages
+      when: ansible_distribution == 'Ubuntu'
+
+    - block:
+        - name: install php-fpm
+          apt:
+            name: php5-fpm
+            state: present
+          tags:
+            - php_fpm_install-packages
+      when: ansible_distribution == 'Debian'
+      
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - block:

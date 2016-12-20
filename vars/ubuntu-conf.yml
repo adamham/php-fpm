@@ -1,8 +1,8 @@
 # Debian / Ubunto specfic variables
-php_fpm_config_file_directory: '/etc/php5/fpm/'
+php_fpm_config_file_directory: '/etc/php/7.0/fpm/'
 php_fpm_session_directory: '/var/lib/php/sessions/'
 php_fpm_log_directory: '/var/log/'
 php_fpm_pid_file: '/run/php-fpm.pid'
 php_fpm_error_log: 'php-fpm.log'
-php_fpm_pool_directory: '/etc/php5/fpm/pool.d/'
+php_fpm_pool_directory: '/etc/php/7.0/fpm/pool.d/'
 php_fpm_socket_directory: '/var/run/'

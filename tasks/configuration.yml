@@ -51,7 +51,62 @@
       tags:
         - php_fpm_systemd-setup
 
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian'
+
+- block:
+    - include_vars: ubuntu-conf.yml
+
+    - name: create php-fpm user
+      group:
+        name: "{{ php_fpm_group }}"
+        system: yes
+        state: present
+      tags:
+        - php_fpm_server-configuration
+
+    - name: create php-fpm user
+      user:
+        name: "{{ php_fpm_user }}"
+        group: "{{ php_fpm_group }}"
+        system: yes
+        state: present
+      tags:
+        - php_fpm_server-configuration
+
+    - name: install php-fpm configuration
+      template:
+        src: php-fpm.conf.j2
+        dest: "{{ php_fpm_config_file_directory }}php-fpm.conf"
+        owner: 'root'
+        group: 'root'
+        mode: 0640
+      notify:
+        - restart php7.0-fpm
+      tags:
+        - php_fpm_server-configuration
+
+    - name: generate php-fpm pool
+      template:
+        src: 'pool.conf.j2'
+        dest: '{{ php_fpm_pool_directory }}pool.conf'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+      notify:
+        - restart php7.0-fpm
+      tags:
+        - php_fpm_server-configuration
+
+    - name: enable php-fpm service
+      become: true
+      service:
+        name: php7.0-fpm
+        enabled: yes
+        state: started
+      tags:
+        - php_fpm_systemd-setup
+
+  when: ansible_distribution == 'Ubuntu'
 
 - block:
     - include_vars: rhel-conf.yml
