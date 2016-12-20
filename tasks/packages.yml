@@ -1,7 +1,7 @@
 - block:
     - name: install php-fpm
       apt:
-        name: php5-fpm
+        name: php-fpm
         state: present
         update_cache: yes
       tags:
