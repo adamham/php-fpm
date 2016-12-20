@@ -1,0 +1,22 @@
+- block:
+    - name: install php-fpm
+      apt:
+        name: php5-fpm
+        state: present
+      tags:
+        - php_fpm_install-packages
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+- block:
+    - name: install epel repository
+      yum:
+        name: epel-release
+        state: present
+      tags: install_packages
+
+    - name: intall php-fpm
+      yum:
+        name: php-fpm
+        state: present
+      tags: php_fpm_install-packages
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

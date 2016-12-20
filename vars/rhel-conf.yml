@@ -1,0 +1,8 @@
+# RHEL / CentOS specific settings
+php_fpm_config_file_directory: '/etc/'
+php_fpm_session_directory: '/var/lib/php/session/'
+php_fpm_log_directory: '/var/log/php-fpm/'
+php_fpm_pid_file: '/run/php-fpm.pid'
+php_fpm_error_log: 'php-fpm.log'
+php_fpm_pool_directory: '/etc/php-fpm.d/'
+php_fpm_socket_directory: '/var/run/php-fpm/'
